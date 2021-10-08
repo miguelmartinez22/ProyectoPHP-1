@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/f33f57c2f7.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../CSS/bootstrap.css">
+    <link rel="stylesheet" href="../CSS/index.css">
+    <title>Proyecto sitio web con PHP. Javier Martinez</title>
+</head>
+<body>
+    <div class="container-fluid">
+      <header>
+        <div class="row" id="row1">
+          <div class="col-lg-3 col-md-4 col-sm-3 col-12" id="logo">
+            <article>
+              <img class="col-lg-7 col-md-9" id="imagenCM" src="images/Logotipo_del_Gobierno_de_la_Comunidad_de_Madrid.png" alt="Comunidad de Madrid">
+            </article>
+          </div>
+          <div class="col-lg-9 col-md-8 col-sm-9 col-12" id="titulo">
+            <h1 class="">VACUNACIÓN COVID-19 2021-22</h1>
+          </div>
+        </div>
+      </header>
+      <main>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-12" id="infoPagina">
+          <h1>SOBRE EL COVID-19</h1>
+          <p>La COVID-19 afecta de distintas maneras en función de cada persona. La mayoría de las personas que se contagian presentan síntomas de intensidad leve o moderada, y se recuperan sin necesidad de hospitalización.</p>
+          <p>Los síntomas más habituales son: tos, fiebre, cansancio y pérdida del gusto y/u olfato.</p>
+          <p>Los síntomas menos habituales son: dolor de garganta, dolor de cabeza, molestias y dolores, diarrea, erupción cutánea
+            o pérdida del color de los dedos de las manos o los pies y ojos rojos o irritados.</p>
+        </div>
+        <div class="row">
+          <div class="col-lg-6 col-md-6 col-sm-6 col-6" id="registro">
+            <h1><i class="fab fa-wpforms"></i> DARSE DE ALTA</h1>
+            <a href="php/registro.php">Haz click aquí para acceder a la página de registro</a>
+          </div>
+          <div class="col-lg-6 col-md-6 col-sm-6 col-6" id="login">
+            <h1><i class="fas fa-sign-in-alt"></i> INICIAR SESIÓN</h1>
+            <a>Si ya estás registrado en este sistema <a href="">pincha aquí para logearte</a></a>
+          </div>
+        </div>
+        <section>
+          <div id="carouselExampleIndicators" class="carousel slide col-6 col-lg-4 col-md-6 col-sm-7" data-ride="carousel">
+            <ol class="carousel-indicators">
+              <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+              <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+              <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+              <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+            </ol>
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <a href="https://www.rtve.es/noticias/20211007/vacuna-coronavirus-mundo/2073422.shtml"><img class="d-block w-100 img-fluid" src="images/enfermero.jpg" alt="First slide"></a>
+              </div>
+              <div class="carousel-item">
+                <a href="https://www.elmundo.es/ciencia-y-salud/salud/2021/10/07/615dd84ffc6c83fa6b8b45eb.html"><img class="d-block w-100 img-fluid" src="images/enfermeros-scaled.jpg" alt="Second slide"></a>
+              </div>
+              <div class="carousel-item">
+                <a href="https://www.abc.es/sociedad/abci-espana-entra-riesgo-bajo-covid-19-202110071742_noticia.html"><img class="d-block w-100 img-fluid" src="images/paciente-covid-persistente-700x469.jpg" alt="Third slide"></a>
+              </div>
+              <div class="carousel-item">
+                <a href="https://www.antena3.com/noticias/sociedad/ceoe-pedira-gobierno-que-vacuna-covid19-sea-obligatoria-empresas_20211007615ecf74e4a5450001540ce1.html"><img class="d-block w-100 img-fluid" src="images/enfermeros.jpeg" alt="Third slide"></a>
+              </div>
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
+        </section>   
+      </main>
+      <footer class="text-center text-lg-start">
+        <!-- Grid container -->
+        <div class="container p-4">
+          <!--Grid row-->
+          <div class="row">
+            <!--Grid column-->
+            <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
+              <h2 class="text-uppercase">Contacto</h2>
+
+              <p><h3><i class="fas fa-envelope-open-text"></i>  vacunacion.covid@madrid.org</h3></p>
+              <p><h3><i class="fas fa-phone"></i>  600 01 00 23</h3></p>
+            </div>
+      
+            <!--Grid column-->
+            <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
+              <h2 class="text-uppercase">Lista de hospitales</h2>
+
+              <p><h3><i class="fas fa-hospital"></i>  Isabel Zendal</h3></p>
+              <p><h3><i class="fas fa-hospital"></i>  Hospital del Sureste</h3></p>
+              <p><h3><i class="fas fa-hospital"></i>  Gregorio Marañón</h3></p>
+              <p><h3><i class="fas fa-syringe"></i>  Wanda Metropolitano</h3></p>
+              <p><h3><i class="fas fa-microphone-alt"></i>  Wizink Center</h3></p>
+            </div>
+            <!--Grid column-->
+          </div>
+          <!--Grid row-->
+        </div>
+        <!-- Grid container -->
+      
+        <!-- Copyright -->
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.4);">
+          © 2021 Copyright:
+          <a class="text-dark" href="https://mdbootstrap.com/">Comunidad de Madrid</a>
+        </div>
+        <!-- Copyright -->
+      </footer>
+    </div> 
+</body>
+
+    <script type="text/javascript" src="JS/jquery-3.4.1.js"></script>
+    <script type="text/javascript" src="JS/popper.min.js"></script>
+    <script type="text/javascript" src="JS/bootstrap.js"></script>
+</html>

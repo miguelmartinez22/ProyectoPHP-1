@@ -1,0 +1,33 @@
+header {
+    height: 20%;
+    background-color: rgb(161, 233, 209);
+}
+#imagenCM {
+    height: 100%;
+    margin-left: 5%;
+}
+#titulo {
+    text-align: center;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+#titulo h1 {
+    font-size:50px;
+    color: white;
+    margin-top: 6%;
+    -webkit-text-stroke: 1px black;
+}
+
+section {
+    border: 1px solid;
+    margin: auto;
+}
+
+section h2, p {
+    text-align: center;
+}
+
+footer {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    background-color: rgb(161, 233, 209);
+}
