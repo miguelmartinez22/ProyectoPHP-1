@@ -74,53 +74,128 @@ footer {
 
 
 /*Responsive*/
-@media (max-width: 768px) {
+@media (max-width: 499px) {
     #carouselExampleIndicators img{
         width: 100%;
-        height: 200px; 
-        border-top-left-radius: calc(0.25rem - 1px);
-        border-top-right-radius: calc(0.25rem - 1px);
+        height: 200px;
     }
 
     .container-fluid {
-        height: 2000px;
+        height: 3500px;
     }
 
     #infoPagina {
         height: 62.5%;
+    }
+
+    #logo {
+        height: 50%;
+
+    }
+
+    #imagenCM {
+        margin-left: 12%;
     }
 }
 
-@media (max-width: 992px) {
+@media (min-width: 500px) and (max-width: 575px) {
     #carouselExampleIndicators img{
         width: 100%;
-        height: 200px; 
-        border-top-left-radius: calc(0.25rem - 1px);
-        border-top-right-radius: calc(0.25rem - 1px);
+        height: 200px;
     }
 
     .container-fluid {
-        height: 2000px;
+        height: 2700px;
     }
 
     #infoPagina {
         height: 62.5%;
+    }
+
+    #logo {
+        height: 50%;
+
+    }
+
+    #imagenCM {
+        margin-left: 30%;
     }
 }
 
-@media (min-width: 992px) and (max-width: 1200px){
-    #carouselExampleIndicators img{
-        width: 100%;
-        height: 200px; 
-        border-top-left-radius: calc(0.25rem - 1px);
-        border-top-right-radius: calc(0.25rem - 1px);
+@media (min-width: 576px) and (max-width: 750px) {
+    .container-fluid {
+        height: 2500px;
     }
 
+    #infoPagina {
+        height: 55%;
+    }
+
+    header {
+        height: 8%;
+    }
+
+    #imagenCM {
+        width: 130%;
+    }
+}
+
+@media (min-width: 751px) and (max-width: 900px) {
+    .container-fluid {
+        height: 2500px;
+    }
+
+    #infoPagina {
+        height: 50%;
+    }
+
+    header {
+        height: 8%;
+    }
+
+    #imagenCM {
+        width: 100%;
+    }
+}
+
+@media (min-width: 901px) and (max-width: 1200px) {
     .container-fluid {
         height: 2000px;
     }
 
+    header {
+        height: 15%;
+    }
+
     #infoPagina {
-        height: 62.5%;
+        height: 50%;
+    }
+}
+
+@media (min-width: 1201px) and (max-width: 1500px) {
+    .container-fluid {
+        height: 1600px;
+    }
+
+    header {
+        height: 15%;
+    }
+
+    #infoPagina {
+        height: 50%;
+    }
+}
+
+@media (min-width: 1501px) and (max-width: 1700px) {
+    .container-fluid {
+        height: 1600px;
+    }
+
+    header {
+        height: 15%;
+    }
+
+    #infoPagina {
+        height: 45%;
     }
 }

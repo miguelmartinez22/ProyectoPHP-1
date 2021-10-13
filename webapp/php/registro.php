@@ -2,21 +2,114 @@
 // Include config file
 require_once "../config/configuracion.php";
 
-// Define variables and initialize with empty values
-$dni = $nombre = $apellidos = $email = $password = $confirm_password = $hospital = "";
-$dni_err = $nombre_err = $email_err = $password_err = $confirm_password_err = "";
+// Definición de variables inicialización con valores vacíos
+$dni = $nombre = $apellido = $email = $password = $confirm_password = $hospital = "";
+$dni_err = $nombre_err = $apellido_err = $email_err = $password_err = $confirm_password_err = "";
 
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
 
-    // Validate username
-    if(empty(trim($_POST["email"]))){
-        $email_err = "Please enter a username.";
-    } elseif(!preg_match('/^\S+@\S+\.\S+$/', trim($_POST["email"]))){
-        $email_err = "Username can only contain letters, numbers, and underscores.";
+    // Validar dni
+    if(empty(trim($_POST["dni"]))){
+        $dni_err = "Introduce tu dni.";
     } else{
         // Prepare a select statement
-        $sql = "SELECT id FROM usuarios WHERE email = ?";
+        $sql = "SELECT dni FROM usuario WHERE dni = ?";
+
+        if($stmt = $mysqli->prepare($sql)){
+            // Bind variables to the prepared statement as parameters
+            $stmt->bind_param("s", $param_dni);
+
+            // Set parameters
+            $param_dni = trim($_POST["dni"]);
+
+            // Attempt to execute the prepared statement
+            if($stmt->execute()){
+                // store result
+                $stmt->store_result();
+
+                if($stmt->num_rows == 1){
+                    $dni_err = "Este dni ya está registrado.";
+                } else{
+                    $dni = trim($_POST["dni"]);
+                }
+            } else{
+                echo "¡Vaya! Algo ha ido mal, vuelve a intentarlo más tarde.";
+            }
+
+            // Close statement
+            $stmt->close();
+        }
+    }
+
+    // Validar nombre
+    if(empty(trim($_POST["nombre"]))){
+        $nombre_err = "Introduce un nombre.";
+    } else{
+        // Prepare a select statement
+        $sql = "SELECT dni FROM usuario WHERE nombre = ?";
+
+        if($stmt = $mysqli->prepare($sql)){
+            // Bind variables to the prepared statement as parameters
+            $stmt->bind_param("s", $param_nombre);
+
+            // Set parameters
+            $param_nombre = trim($_POST["nombre"]);
+
+            // Attempt to execute the prepared statement
+            if($stmt->execute()){
+                // store result
+                $stmt->store_result();
+
+                $nombre = trim($_POST["nombre"]);
+            } else{
+                echo "¡Vaya! Algo ha ido mal, vuelve a intentarlo más tarde.";
+            }
+
+            // Close statement
+            $stmt->close();
+        }
+    }
+
+
+    // Validar apellido
+    if(empty(trim($_POST["apellido"]))){
+        $apellido_err = "Introduce tu primer apellido.";
+    } else{
+        // Prepare a select statement
+        $sql = "SELECT dni FROM usuario WHERE apellidos = ?";
+
+        if($stmt = $mysqli->prepare($sql)){
+            // Bind variables to the prepared statement as parameters
+            $stmt->bind_param("s", $param_apellido);
+
+            // Set parameters
+            $apellido_email = trim($_POST["apellido"]);
+
+            // Attempt to execute the prepared statement
+            if($stmt->execute()){
+                // store result
+                $stmt->store_result();
+
+                $apellido = trim($_POST["apellido"]);
+            } else{
+                echo "¡Vaya! Algo ha ido mal, vuelve a intentarlo más tarde.";
+            }
+
+            // Close statement
+            $stmt->close();
+        }
+    }
+
+
+    // Validar email
+    if(empty(trim($_POST["email"]))){
+        $email_err = "Introduce una dirección de correo electrónico.";
+    } elseif(!preg_match('/^\S+@\S+\.\S+$/', trim($_POST["email"]))){
+        $email_err = "El email sólo puede contener letras, números y ciertos carácteres especiales.";
+    } else{
+        // Prepare a select statement
+        $sql = "SELECT dni FROM usuario WHERE email = ?";
 
         if($stmt = $mysqli->prepare($sql)){
             // Bind variables to the prepared statement as parameters
@@ -31,12 +124,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 $stmt->store_result();
 
                 if($stmt->num_rows == 1){
-                    $email_err = "This username is already taken.";
+                    $email_err = "Este email ya está registrado";
                 } else{
                     $email = trim($_POST["email"]);
                 }
             } else{
-                echo "Oops! Something went wrong. Please try again later.";
+                echo "¡Vaya! Algo ha ido mal, vuelve a intentarlo más tarde.";
             }
 
             // Close statement
@@ -44,7 +137,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         }
     }
 
-    // Validate password
+    // Validar contraseña
     if(empty(trim($_POST["password"]))){
         $password_err = "Please enter a password.";
     } elseif(strlen(trim($_POST["password"])) < 6){
@@ -53,7 +146,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $password = trim($_POST["password"]);
     }
 
-    // Validate confirm password
+    // Validar confirmación de contraseña
     if(empty(trim($_POST["confirm_password"]))){
         $confirm_password_err = "Please confirm password.";
     } else{
@@ -63,26 +156,33 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         }
     }
 
+    //Validar selección de hospital
+    $hospital = trim($_POST["hospital"]);
+
     // Check input errors before inserting in database
-    if(empty($email_err) && empty($password_err) && empty($confirm_password_err)){
+    if(empty($dni_err) && empty($nombre_err) && empty($apellido_err) && empty($email_err) && empty($password_err) && empty($confirm_password_err)){
 
         // Prepare an insert statement
-        $sql = "INSERT INTO usuarios (email, passwd) VALUES (?, ?)";
+        $sql = "INSERT INTO usuario (dni, nombre, apellidos, email, contraseña, hospital) VALUES (?, ?, ?, ?, ?, ?)";
 
         if($stmt = $mysqli->prepare($sql)){
             // Bind variables to the prepared statement as parameters
-            $stmt->bind_param("ss", $param_email, $param_password);
+            $stmt->bind_param("ssssss", $param_dni, $param_nombre, $param_apellido, $param_email, $param_password, $param_hospital);
 
             // Set parameters
+            $param_dni = $dni;
+            $param_nombre = $nombre;
+            $param_apellido = $apellido;
             $param_email = $email;
             $param_password = password_hash($password, PASSWORD_BCRYPT); // Creates a password hash
+            $param_hospital = $hospital;
 
             // Attempt to execute the prepared statement
             if($stmt->execute()){
                 // Redirect to login page
                 header("location: login.php");
             } else{
-                echo "Oops! Something went wrong. Please try again later.";
+                echo "¡Vaya! Algo ha ido mal, vuelve a intentarlo más tarde.";
             }
 
             // Close statement
@@ -124,7 +224,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     </header>
     <main>
         <section class="col-8 col-lg-8 col-md-8 col-sm-8">
-            <h2>Regístrate</h2>
+            <h2>REGISTRARSE</h2>
             <p>Rellena el siguiente formulario para crear una cuenta.</p>
             <?php
             if(isset($_POST["email"])){
@@ -144,8 +244,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 </div>
                 <div class="form-group">
                     <label>Apellidos</label>
-                    <input type="text" name="apellidos" class="form-control <?php echo (!empty($apellidos_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $apellidos; ?>">
-                    <span class="invalid-feedback"><?php echo $apellidos_err; ?></span>
+                    <input type="text" name="apellido" class="form-control <?php echo (!empty($apellido_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $apellido; ?>">
+                    <span class="invalid-feedback"><?php echo $apellido_err; ?></span>
                 </div>
                 <div class="form-group">
                     <label>Email</label>
@@ -165,11 +265,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 <div class="form-group">
                     <label for="hospital">Elige un centro de vacunación</label>
                     <select name="hospital" id="hospital">
-                        <option value="zendal">Isabel Zendal</option>
-                        <option value="sureste">Hospital del Sureste</option>
-                        <option value="marañon">Gregorio Marañón</option>
-                        <option value="wanda">Wanda Metropolitano</option>
-                        <option value="wizink">Wizink Center</option>
+                        <option value="<?php echo $hospital; ?>">Isabel Zendal</option>
+                        <option value="<?php echo $hospital; ?>">Hospital del Sureste</option>
+                        <option value="<?php echo $hospital; ?>">Gregorio Marañón</option>
+                        <option value="<?php echo $hospital; ?>">Wanda Metropolitano</option>
+                        <option value="<?php echo $hospital; ?>">Wizink Center</option>
                     </select>
                 </div>
                 <div class="form-group">
