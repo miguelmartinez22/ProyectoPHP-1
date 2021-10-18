@@ -149,13 +149,8 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
 <head>
     <meta charset="UTF-8">
     <title>Actualizar vacuna</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <style>
-        .wrapper{
-            width: 600px;
-            margin: 0 auto;
-        }
-    </style>
+    <link rel="stylesheet" href="../css/actualizarVacuna.css">
+    <link rel="stylesheet" href="../css/bootstrap.css">
 </head>
 <body>
     <div class="wrapper">
@@ -203,5 +198,9 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
             </div>        
         </div>
     </div>
+
+    <script type="text/javascript" src="../JS/jquery-3.4.1.js"></script>
+    <script type="text/javascript" src="../JS/popper.min.js"></script>
+    <script type="text/javascript" src="../JS/bootstrap.js"></script>
 </body>
 </html>

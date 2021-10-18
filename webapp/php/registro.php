@@ -347,5 +347,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         <!-- Copyright -->
     </footer>
 </div>
+
+<script type="text/javascript" src="../JS/jquery-3.4.1.js"></script>
+<script type="text/javascript" src="../JS/popper.min.js"></script>
+<script type="text/javascript" src="../JS/bootstrap.js"></script>
+
 </body>
 </html>

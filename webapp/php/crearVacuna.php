@@ -108,8 +108,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <meta charset="UTF-8">
     <title>CREAR VACUNA</title>
     <script src="https://kit.fontawesome.com/f33f57c2f7.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/sign-in/">
     <link rel="stylesheet" href="../css/bootstrap.css">
     <link rel="stylesheet" href="../css/crearVacuna.css">
 </head>
@@ -204,6 +202,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         <!-- Copyright -->
     </footer>
 </div>
+
+<script type="text/javascript" src="../JS/jquery-3.4.1.js"></script>
+<script type="text/javascript" src="../JS/popper.min.js"></script>
+<script type="text/javascript" src="../JS/bootstrap.js"></script>
 
 </body>
 </html>

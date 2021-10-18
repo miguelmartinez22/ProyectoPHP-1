@@ -54,14 +54,12 @@ if(isset($_GET["id"]) && !empty(trim($_GET["id"]))){
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/f33f57c2f7.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <link rel="stylesheet" href="../css/verVacuna.css">
     <title>Ver Vacuna</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <style>
-        .wrapper{
-            width: 600px;
-            margin: 0 auto;
-        }
-    </style>
 </head>
 <body>
 <div class="wrapper">
@@ -81,10 +79,15 @@ if(isset($_GET["id"]) && !empty(trim($_GET["id"]))){
                     <label>Núm. dosis</label>
                     <p><b><?php echo $row["num_dosis"]; ?></b></p>
                 </div>
-                <p><a href="listado.php" class="btn btn-primary">Volver</a></p>
+                <p><a href="listarVacuna.php" class="btn btn-primary">Volver</a></p>
             </div>
         </div>
     </div>
 </div>
+
+<script type="text/javascript" src="../JS/jquery-3.4.1.js"></script>
+<script type="text/javascript" src="../JS/popper.min.js"></script>
+<script type="text/javascript" src="../JS/bootstrap.js"></script>
+
 </body>
 </html>
