@@ -59,11 +59,23 @@ if(isset($_GET["id"]) && !empty(trim($_GET["id"]))){
     <script src="https://kit.fontawesome.com/f33f57c2f7.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../css/bootstrap.css">
     <link rel="stylesheet" href="../css/verVacuna.css">
-    <title>Ver Vacuna</title>
+    <title>VER VACUNAS</title>
 </head>
 <body>
-<div class="wrapper">
-    <div class="container-fluid">
+<div class="container-fluid">
+    <header>
+        <div class="row" id="row1">
+            <div class="col-lg-3 col-md-4 col-sm-3 col-12" id="logo">
+                <article>
+                    <img class="col-lg-7 col-md-9" id="imagenCM" src="../images/Logotipo_del_Gobierno_de_la_Comunidad_de_Madrid.png" alt="Comunidad de Madrid">
+                </article>
+            </div>
+            <div class="col-lg-9 col-md-8 col-sm-9 col-12" id="titulo">
+                <h1 class="">VACUNACIÓN COVID-19 2021-22</h1>
+            </div>
+        </div>
+    </header>
+    <main>
         <div class="row">
             <div class="col-md-12">
                 <h1 class="mt-5 mb-3">Ver Vacuna</h1>
@@ -82,7 +94,43 @@ if(isset($_GET["id"]) && !empty(trim($_GET["id"]))){
                 <p><a href="listarVacuna.php" class="btn btn-primary">Volver</a></p>
             </div>
         </div>
-    </div>
+    </main>
+    <footer class="text-center text-lg-start">
+        <!-- Grid container -->
+        <div class="container p-4">
+            <!--Grid row-->
+            <div class="row">
+                <!--Grid column-->
+                <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
+                    <h2 class="text-uppercase">Contacto</h2>
+
+                    <p><h3><i class="fas fa-envelope-open-text"></i>  vacunacion.covid@madrid.org</h3></p>
+                    <p><h3><i class="fas fa-phone"></i>  600 01 00 23</h3></p>
+                </div>
+
+                <!--Grid column-->
+                <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
+                    <h2 class="text-uppercase">Lista de hospitales</h2>
+
+                    <p><h3><i class="fas fa-hospital"></i>  Isabel Zendal</h3></p>
+                    <p><h3><i class="fas fa-hospital"></i>  Hospital del Sureste</h3></p>
+                    <p><h3><i class="fas fa-hospital"></i>  Gregorio Marañón</h3></p>
+                    <p><h3><i class="fas fa-syringe"></i>  Wanda Metropolitano</h3></p>
+                    <p><h3><i class="fas fa-microphone-alt"></i>  Wizink Center</h3></p>
+                </div>
+                <!--Grid column-->
+            </div>
+            <!--Grid row-->
+        </div>
+        <!-- Grid container -->
+
+        <!-- Copyright -->
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.4);">
+            © 2021 Copyright:
+            <a class="text-dark" href="https://mdbootstrap.com/">Comunidad de Madrid</a>
+        </div>
+        <!-- Copyright -->
+    </footer>
 </div>
 
 <script type="text/javascript" src="../JS/jquery-3.4.1.js"></script>
