@@ -1,5 +1,6 @@
 .container-fluid {
-    height: 1400px;
+    border: 1px solid black;
+    height: 1000px;
 }
 
 header {

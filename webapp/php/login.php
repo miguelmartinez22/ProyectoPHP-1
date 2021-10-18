@@ -26,7 +26,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     // Validar credenciales
     if(empty($email_err) && empty($password_err)){
         // Prepare a select statement
-        $sql = "SELECT dni, email, passwd FROM usuario WHERE email = ?";
+        $sql = "SELECT dni, email, password FROM usuario WHERE email = ?";
 
 
         if($stmt = $mysqli->prepare($sql)){
@@ -51,7 +51,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
                             //if ($email == )
 
-                            // Redirect user to welcome page
+                            // Redirige a la página de información del usuario
                             header("location: infoUsuario.php");
                         } else{
                             // Password is not valid, display a generic error message
@@ -88,7 +88,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/sign-in/">
     <link rel="stylesheet" href="../css/bootstrap.css">
     <link rel="stylesheet" href="../css/registro.css">
-    <title>Signin Template · Bootstrap</title>
+    <title>Iniciar Sesión</title>
 
     <style type="text/css">
         .bd-placeholder-img {

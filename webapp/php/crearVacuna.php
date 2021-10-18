@@ -25,7 +25,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     if(empty($input_nombreLargo)){
         $nombreLargo_error = "Introduce el nombre científico.";
     } else{
-        $fabricante = $input_nombreLargo;
+        $nombreLargo = $input_nombreLargo;
     }
 
     // Validate fabricante
@@ -63,11 +63,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     } elseif(!ctype_digit($input_tiempoMaximo)){
         $tiempoMaximo_error = "Please enter a positive integer value.";
     } else{
-        $tiempotiempoMaximo = $input_tiempoMaximo;
+        $tiempoMaximo = $input_tiempoMaximo;
     }
 
-    // Check input errors before inserting in database
-    if(empty($nombreLargo_error) && empty($fabricante_error) && empty($numDosis_error)){
+    // Comprueba si hay errores antes de insertar los datos en la BBDD
+    if(empty($nombre_error) && empty($nombreLargo_error) && empty($fabricante_error) && empty($numDosis_error) && empty($tiempoMinimo_error) && empty($tiempoMaximo_error)){
         // Prepare an insert statement
         $sql = "INSERT INTO vacuna (nombre, nombre_largo, fabricante, num_dosis, dias_minimos, dias_maximos) VALUES (?, ?, ?, ?, ?, ?)";
 
@@ -103,7 +103,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <title>CREAR VACUNA</title>
@@ -112,12 +112,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/sign-in/">
     <link rel="stylesheet" href="../css/bootstrap.css">
     <link rel="stylesheet" href="../css/crearVacuna.css">
-    <style>
-        .wrapper{
-            width: 600px;
-            margin: 0 auto;
-        }
-    </style>
 </head>
 <body>
 <div class="container-fluid">

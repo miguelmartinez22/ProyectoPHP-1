@@ -156,18 +156,51 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         }
     }
 
-    //Validar selección de hospital
-    $hospital = trim($_POST["hospital"]);
-
-    // Check input errors before inserting in database
-    if(empty($dni_err) && empty($nombre_err) && empty($apellido_err) && empty($email_err) && empty($password_err) && empty($confirm_password_err)){
-
-        // Prepare an insert statement
-        $sql = "INSERT INTO usuario (dni, nombre, apellidos, email, contraseña, hospital) VALUES (?, ?, ?, ?, ?, ?)";
+    //Validar hospital
+    if(empty(trim($_POST["hospital"]))){
+        $hospital_err = "Introduce un hospital de los mostrados abajo.";
+    } else{
+        // Prepare a select statement
+        $sql = "SELECT dni FROM usuario WHERE hospital = ?";
 
         if($stmt = $mysqli->prepare($sql)){
             // Bind variables to the prepared statement as parameters
-            $stmt->bind_param("ssssss", $param_dni, $param_nombre, $param_apellido, $param_email, $param_password, $param_hospital);
+            $stmt->bind_param("s", $param_hospital);
+
+            // Set parameters
+            $param_hospital = trim($_POST["hospital"]);
+
+            // Attempt to execute the prepared statement
+            if($stmt->execute()){
+                // store result
+                $stmt->store_result();
+
+                $hospital = trim($_POST["hospital"]);
+                if(($hospital != "Isabel Zendal") && ($hospital != "Hospital del Sureste") && ($hospital != "Gregorio Marañón") && ($hospital != "Wanda Metropolitano") && ($hospital != "Wizink Center")){
+                    $hospital_err = "Ese hospital no está en la lista";
+                }
+            } else{
+                echo "¡Vaya! Algo ha ido mal, vuelve a intentarlo más tarde.";
+            }
+
+            // Close statement
+            $stmt->close();
+        }
+    }
+
+    //Crear vacunas
+    $vacuna1 = date('d-m-Y', strtotime('+1 week'));
+    $vacuna2 = date('d-m-Y', strtotime('+5 week'));
+
+    // Check input errors before inserting in database
+    if(empty($dni_err) && empty($nombre_err) && empty($apellido_err) && empty($email_err) && empty($password_err) && empty($confirm_password_err) && empty($hospital_err)){
+
+        // Prepare an insert statement
+        $sql = "INSERT INTO usuario (dni, nombre, apellidos, email, password, hospital, vacuna1, vacuna2) VALUES (?, ?, ?, ?, ?, ?,  STR_TO_DATE(?, '%d,%m,%Y'), STR_TO_DATE(?, '%d,%m,%Y'))";
+
+        if($stmt = $mysqli->prepare($sql)){
+            // Bind variables to the prepared statement as parameters
+            $stmt->bind_param("ssssssss", $param_dni, $param_nombre, $param_apellido, $param_email, $param_password, $param_hospital, $param_vacuna1, $param_vacuna2);
 
             // Set parameters
             $param_dni = $dni;
@@ -176,6 +209,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             $param_email = $email;
             $param_password = password_hash($password, PASSWORD_BCRYPT); // Creates a password hash
             $param_hospital = $hospital;
+            $param_vacuna1 = $vacuna1;
+            $param_vacuna2 = $vacuna2;
 
             // Attempt to execute the prepared statement
             if($stmt->execute()){
@@ -263,14 +298,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     <span class="invalid-feedback"><?php echo $confirm_password_err; ?></span>
                 </div>
                 <div class="form-group">
-                    <label for="hospital">Elige un centro de vacunación</label>
-                    <select name="hospital" id="hospital">
-                        <option value="<?php echo $hospital; ?>">Isabel Zendal</option>
-                        <option value="<?php echo $hospital; ?>">Hospital del Sureste</option>
-                        <option value="<?php echo $hospital; ?>">Gregorio Marañón</option>
-                        <option value="<?php echo $hospital; ?>">Wanda Metropolitano</option>
-                        <option value="<?php echo $hospital; ?>">Wizink Center</option>
-                    </select>
+                    <label>Hospital</label>
+                    <input type="text" name="hospital" class="form-control <?php echo (!empty($hospital_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $hospital; ?>">
+                    <span class="invalid-feedback"><?php echo $hospital_err; ?></span>
                 </div>
                 <div class="form-group">
                     <input type="submit" class="btn btn-primary" value="Submit">

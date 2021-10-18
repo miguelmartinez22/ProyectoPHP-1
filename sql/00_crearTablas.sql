@@ -4,7 +4,7 @@ CREATE TABLE IF NOT EXISTS usuario (
     nombre VARCHAR(20) NOT NULL,
     apellidos VARCHAR(100) NOT NULL,
     email VARCHAR(100) NOT NULL UNIQUE,
-    contraseña VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
     hospital VARCHAR(100) NOT NULL,
     vacuna1 DATE NOT NULL,
     vacuna2 DATE NOT NULL

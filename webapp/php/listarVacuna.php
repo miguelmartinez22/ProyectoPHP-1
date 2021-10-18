@@ -27,7 +27,7 @@
     </script>
 </head>
 <body>
-<div class="container-fluid">
+<div class="container-fluid" style="height: 800px;">
     <header>
         <div class="row" id="row1">
             <div class="col-lg-3 col-md-4 col-sm-3 col-12" id="logo">
@@ -58,10 +58,12 @@
                     echo "<thead>";
                     echo "<tr>";
                     echo "<th>#</th>";
-                    echo "<th>Name</th>";
-                    echo "<th>Address</th>";
-                    echo "<th>Salary</th>";
-                    echo "<th>Action</th>";
+                    echo "<th>Nombre</th>";
+                    echo "<th>Nombre completo</th>";
+                    echo "<th>Fabricante</th>";
+                    echo "<th>Número de dosis</th>";
+                    echo "<th>Días mínimos</th>";
+                    echo "<th>Días máximos</th>";
                     echo "</tr>";
                     echo "</thead>";
                     echo "<tbody>";
@@ -69,8 +71,11 @@
                         echo "<tr>";
                         echo "<td>" . $row['id'] . "</td>";
                         echo "<td>" . $row['nombre'] . "</td>";
+                        echo "<td>" . $row['nombre_largo'] . "</td>";
                         echo "<td>" . $row['fabricante'] . "</td>";
                         echo "<td>" . $row['num_dosis'] . "</td>";
+                        echo "<td>" . $row['dias_minimos'] . "</td>";
+                        echo "<td>" . $row['dias_maximos'] . "</td>";
                         echo "<td>";
                         echo '<a href="read.php?id='. $row['id'] .'" class="mr-3" title="View Record" data-toggle="tooltip"><span class="fa fa-eye"></span></a>';
                         echo '<a href="update.php?id='. $row['id'] .'" class="mr-3" title="Update Record" data-toggle="tooltip"><span class="fa fa-pencil"></span></a>';
