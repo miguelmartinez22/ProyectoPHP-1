@@ -1,13 +1,13 @@
 <?php
 // Include config file
 require_once "../config/configuracion.php";
- 
+
 // Define variables and initialize with empty values
 $nombre = $nombrelargo = $fabricante = $numdosis = "";
-$tiempominimo =  $tiempomaximo = "";
+$diasminimos =  $diasmaximos = "";
 $nombre_err = $nombrelargo_err = $fabricante_err = $numdosis_err ="";
-$tiempominimo_err =  $tiempomaximo_err = "";
- 
+$diasminimos_err =  $diasmaximos_err = "";
+
 // Procesamiento de datos cuando se envía el formulario
 if(isset($_POST["id"]) && !empty($_POST["id"])){
     // Get hidden input value
@@ -51,42 +51,42 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
         $numdosis = $input_numdosis;
     }
 
-    $tiempominimo = trim($_POST["tiempominimo"]);
-    $tiempomaximo = trim($_POST["tiempomaximo"]);
-    
+    $diasminimos = trim($_POST["diasminimos"]);
+    $diasmaximos = trim($_POST["diasmaximos"]);
+
     // Check input errors before inserting in database
     if(empty($nombre_err) && empty($fabricante_err) && empty($nombrelargo_err)&& empty($numdosis_err)){
         // Prepare an update statement
-        $sql = "UPDATE vacuna SET nombre=?, nombre_largo=?, fabricante=?, num_dosis=?, tiempo_minimo=?, tiempo_maximo=? WHERE id=?";
- 
+        $sql = "UPDATE vacuna SET nombre=?, nombre_largo=?, fabricante=?, num_dosis=?, dias_minimos=?, dias_maximos=? WHERE id=?";
+
         if($stmt = $mysqli->prepare($sql)){
             // Bind variables to the prepared statement as parameters
             $stmt->bind_param("sssiiii", $param_nombre, $param_nombrelargo, $param_fabricante,
-                $param_numdosis, $param_tiempominimo, $param_tiempomaximo, $param_id);
+                $param_numdosis, $param_diasminimos, $param_diasmaximos, $param_id);
 
             // Set parameters
             $param_nombre = $nombre;
             $param_nombrelargo = $nombrelargo;
             $param_fabricante = $fabricante;
             $param_numdosis = $numdosis;
-            $param_tiempominimo = $tiempominimo;
-            $param_tiempomaximo = $tiempomaximo;
+            $param_diasminimos = $diasminimos;
+            $param_diasmaximos = $diasmaximos;
             $param_id = $id;
-            
+
             // Attempt to execute the prepared statement
             if($stmt->execute()){
                 // Records updated successfully. Redirect to landing page
-                header("location: listado.php");
+                header("location: listarVacuna.php");
                 exit();
             } else{
                 echo "¡Vaya! Algo ha ido mal, vuelve a intentarlo más tarde.";
             }
         }
-         
+
         // Close statement
         $stmt->close();
     }
-    
+
     // Close connection
     $mysqli->close();
 } else{
@@ -94,46 +94,46 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
     if(isset($_GET["id"]) && !empty(trim($_GET["id"]))){
         // Get URL parameter
         $id =  trim($_GET["id"]);
-        
+
         // Prepare a select statement
         $sql = "SELECT * FROM vacuna WHERE id = ?";
         if($stmt = $mysqli->prepare($sql)){
             // Bind variables to the prepared statement as parameters
             $stmt->bind_param("i", $param_id);
-            
+
             // Set parameters
             $param_id = $id;
-            
+
             // Attempt to execute the prepared statement
             if($stmt->execute()){
                 $result = $stmt->get_result();
-                
+
                 if($result->num_rows == 1){
                     /* Fetch result row as an associative array. Since the result set
                     contains only one row, we don't need to use while loop */
                     $row = $result->fetch_array(MYSQLI_ASSOC);
-                    
+
                     // Retrieve individual field value
                     $nombre = $row["nombre"];
                     $nombrelargo = $row["nombre_largo"];
                     $fabricante = $row["fabricante"];
                     $numdosis = $row["num_dosis"];
-                    $tiempominimo = $row["dias_minimos"];
-                    $tiempomaximo = $row["dias_maximos"];
+                    $diasminimos = $row["dias_minimos"];
+                    $diasmaximos = $row["dias_maximos"];
                 } else{
                     // URL doesn't contain valid id. Redirect to error page
                     header("location: error.php");
                     exit();
                 }
-                
+
             } else{
                 echo "Oops! Algo fue mal. Please try again later.";
             }
         }
-        
+
         // Close statement
         $stmt->close();
-        
+
         // Close connection
         $mysqli->close();
     }  else{
@@ -143,8 +143,8 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
     }
 }
 ?>
- 
- <!DOCTYPE html>
+
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -194,17 +194,17 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
                     </div>
                     <div class="form-group">
                         <label>Tiempo mínimo</label>
-                        <input type="text" name="tiempominimo" class="form-control <?php echo (!empty($tiempominimo_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $tiempominimo; ?>">
-                        <span class="invalid-feedback"><?php echo $tiempominimo_err;?></span>
+                        <input type="text" name="diasminimos" class="form-control <?php echo (!empty($diasminimos_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $diasminimos; ?>">
+                        <span class="invalid-feedback"><?php echo $diasminimos_err;?></span>
                     </div>
                     <div class="form-group">
                         <label>Tiempo máximo</label>
-                        <input type="text" name="tiempomaximo" class="form-control <?php echo (!empty($tiempomaximo_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $tiempomaximo; ?>">
-                        <span class="invalid-feedback"><?php echo $tiempomaximo_err;?></span>
+                        <input type="text" name="diasmaximos" class="form-control <?php echo (!empty($diasmaximos_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $diasmaximos; ?>">
+                        <span class="invalid-feedback"><?php echo $diasmaximos_err;?></span>
                     </div>
                     <input type="hidden" name="id" value="<?php echo $id; ?>"/>
                     <input type="submit" class="btn btn-primary" value="Guardar">
-                    <a href="listado.php" class="btn btn-secondary ml-2">Cancelar</a>
+                    <a href="listarVacuna.php" class="btn btn-secondary ml-2">Cancelar</a>
                 </form>
             </div>
         </div>
@@ -247,8 +247,8 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
     </footer>
 </div>
 
-    <script type="text/javascript" src="../JS/jquery-3.4.1.js"></script>
-    <script type="text/javascript" src="../JS/popper.min.js"></script>
-    <script type="text/javascript" src="../JS/bootstrap.js"></script>
+<script type="text/javascript" src="../JS/jquery-3.4.1.js"></script>
+<script type="text/javascript" src="../JS/popper.min.js"></script>
+<script type="text/javascript" src="../JS/bootstrap.js"></script>
 </body>
 </html>

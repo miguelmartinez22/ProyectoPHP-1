@@ -132,7 +132,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                 <div class="form-group">
                     <label>Nombre</label>
-                    <input type="text" name="nombre" class="form-control <?php echo (!empty($nombre_error)) ? 'is-invalid' : ''; ?>" value="<?php echo $nombre; ?>">
+                    <input type="text" name="nombre" class="form-control <?php echo (!empty($nombre_error)) ? 'is-invalid' : ''; ?>" value="<?php echo $nombre; ?>" placeholder="Nombre vacuna">
                     <span class="invalid-feedback"><?php echo $nombre_error;?></span>
                 </div>
                 <div class="form-group">
@@ -161,7 +161,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     <span class="invalid-feedback"><?php echo $tiempoMaximo_error;?></span>
                 </div>
                 <input type="submit" class="btn btn-primary" value="Submit">
-                <a href="index.php" class="btn btn-secondary ml-2">Cancelar</a>
+                <a href="listarVacuna.php" class="btn btn-secondary ml-2">Cancelar</a>
             </form>
         </section>
     </main>

@@ -1,13 +1,11 @@
 <?php
-require_once "../config/configuracion.php";
-
-session_name("email");
-// Starting session
+// inicilizar la sesion
 session_start();
 
-if(isset($_POST['email'])) {
-    $_SESSION['email'] = $_POST['email'];
-    echo "¡Bienvenido <b> " . $_POST['email'] . "!</b>";
+// Verifica que el usuario ha iniciado sesión. En caso contrario lo redirige a esa página
+if(!isset($_SESSION["login"]) || $_SESSION["login"] !== true){
+    header("location: login.php");
+    exit;
 }
 ?>
 
@@ -30,12 +28,40 @@ if(isset($_POST['email'])) {
                 </article>
             </div>
             <div class="col-lg-9 col-md-8 col-sm-9 col-12" id="titulo">
-                <h1 class="">INFORMACIÓN DEL USUARIO</h1>
+                <h1 class="">VACUNACIÓN COVID-19 2021-22</h1>
             </div>
         </div>
     </header>
     <main>
+        <h1 class="my-5">Hola, <b><?php echo htmlspecialchars($_SESSION["email"]); ?></b>. Estos son tus datos de vacunación.</h1>
+        <br>
+        <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>DNI</th>
+                <th>Nombre</th>
+                <th>Apellidos</th>
+                <th>Email</th>
+                <th>Hospital de vacunación</th>
+                <th>Fecha 1ª vacuna</th>
+                <th>Fecha 2ª vacuna</th>
+            </tr>
+            <tr>
+                <td><?php echo htmlspecialchars($_SESSION["dni"]); ?></td>
+                <td><?php echo htmlspecialchars($_SESSION["nombre"]); ?></td>
+                <td><?php echo htmlspecialchars($_SESSION["apellidos"]); ?></td>
+                <td><?php echo htmlspecialchars($_SESSION["email"]); ?></td>
+                <td><?php echo htmlspecialchars($_SESSION["hospital"]); ?></td>
+                <td><?php echo htmlspecialchars($_SESSION["vacuna1"]); ?></td>
+                <td><?php echo htmlspecialchars($_SESSION["vacuna2"]); ?></td>
+            </tr>
+        </thead>
+        <tbody>
 
+        </tbody>
+
+        <a href="resetPassword.php" class="btn btn-warning">Restablece tu contraseña</a>
+        <a href="logout.php" class="btn btn-danger ml-3">Salir</a>
     </main>
     <footer class="text-center text-lg-start">
         <!-- Grid container -->

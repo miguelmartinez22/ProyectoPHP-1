@@ -34,7 +34,7 @@ if(isset($_GET["id"]) && !empty(trim($_GET["id"]))){
             }
 
         } else{
-            echo "¡Vaya! Algo ha ido mal, vuelve a intentarlo más tarde.";
+            echo "Oops! Algo fue mal. Por favor intentalo de nuevo mas tarde.";
         }
     }
 
@@ -76,22 +76,26 @@ if(isset($_GET["id"]) && !empty(trim($_GET["id"]))){
         </div>
     </header>
     <main>
-        <div class="row">
-            <div class="col-md-12">
-                <h1 class="mt-5 mb-3">Ver Vacuna</h1>
-                <div class="form-group">
-                    <label>Nombre</label>
-                    <p><b><?php echo $row["nombre"]; ?></b></p>
+        <div class="wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1 class="mt-5 mb-3">Ver Vacuna</h1>
+                        <div class="form-group">
+                            <label>Nombre</label>
+                            <p><b><?php echo $row["nombre"]; ?></b></p>
+                        </div>
+                        <div class="form-group">
+                            <label>Fabricante</label>
+                            <p><b><?php echo $row["fabricante"]; ?></b></p>
+                        </div>
+                        <div class="form-group">
+                            <label>Núm. dosis</label>
+                            <p><b><?php echo $row["num_dosis"]; ?></b></p>
+                        </div>
+                        <p><a href="listarVacuna.php" class="btn btn-primary">Volver</a></p>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label>Fabricante</label>
-                    <p><b><?php echo $row["fabricante"]; ?></b></p>
-                </div>
-                <div class="form-group">
-                    <label>Núm. dosis</label>
-                    <p><b><?php echo $row["num_dosis"]; ?></b></p>
-                </div>
-                <p><a href="listarVacuna.php" class="btn btn-primary">Volver</a></p>
             </div>
         </div>
     </main>

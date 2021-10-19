@@ -1,4 +1,14 @@
 <?php
+// Inicializar la sesion
+session_start();
+
+// Check if the user is already logged in, if yes then redirect him to welcome page
+if(isset($_SESSION["login"]) && $_SESSION["login"] === true){
+    header("location: infoUsuario.php");
+    exit;
+}
+
+
 // Include config file
 require_once "../config/configuracion.php";
 
@@ -16,7 +26,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $email = trim($_POST["email"]);
     }
 
-    // Comprueba si la contraseña está vacia
+    // Comprueba si el campo de contraseña está vacio
     if(empty(trim($_POST["password"]))){
         $password_err = "Introduce tu contraseña.";
     } else{
@@ -26,7 +36,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     // Validar credenciales
     if(empty($email_err) && empty($password_err)){
         // Prepare a select statement
-        $sql = "SELECT dni, email, password FROM usuario WHERE email = ?";
+        $sql = "SELECT id, email, password FROM usuario WHERE email = ?";
 
 
         if($stmt = $mysqli->prepare($sql)){
@@ -39,28 +49,33 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             // Attempt to execute the prepared statement
             if($stmt->execute()){
                 // Store result
-                $stmt->store_result();
+                $result = $stmt->get_result();
 
                 // Check if username exists, if yes then verify password
-                if($stmt->num_rows == 1){
+                if($result->num_rows == 1){
                     // Bind result variables
-                    $stmt->bind_result($dni, $email, $hashed_password);
-                    if($stmt->fetch()){
-                        if(password_verify($password, $hashed_password)){
-                            // Password is correct
+                    $fila = $result->fetch_assoc();
+                    if(password_verify($password, $fila["password"])){
+                        // Password is correct, so start a new session
 
-                            //if ($email == )
-
-                            // Redirige a la página de información del usuario
-                            header("location: infoUsuario.php");
-                        } else{
-                            // Password is not valid, display a generic error message
-                            $login_err = "Email o contraseña incorrecto.";
+                        if(!isset($_SESSION))
+                        {
+                            session_start();
                         }
+
+                        // Guardamos los datos de las sesiones en variables
+                        $_SESSION["login"] = true;
+                        $_SESSION["id"] = $fila["id"];
+                        $_SESSION["email"] = $fila["email"];
+
+
+                        // Redirect user to welcome page
+                        header("location: infoUsuario.php");
+                    } else{
+                        // Password is not valid, display a generic error message
+                        $login_err = "Email o contraseña incorrectos.";
                     }
-                } else{
-                    // Username doesn't exist, display a generic error message
-                    $login_err = "Email o contraseña incorrecto.";
+
                 }
             } else{
                 echo "¡Vaya! Algo ha ido mal, vuelve a intentarlo más tarde.";
@@ -86,24 +101,32 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <script src="https://kit.fontawesome.com/f33f57c2f7.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../css/bootstrap.css">
     <link rel="stylesheet" href="../css/registro.css">
+
+    <!--Script de AJAX-->
+    <script>
+        $(document).ready(function(){
+            $('.search-box input[type="text"]').on("keyup input", function(){
+                /* Get input value on change */
+                var inputVal = $(this).val();
+                var resultDropdown = $(this).siblings(".result");
+                if(inputVal.length){
+                    $.get("buscarAjax.php", {term: inputVal}).done(function(data){
+                        // Display the returned data in browser
+                        resultDropdown.html(data);
+                    });
+                } else{
+                    resultDropdown.empty();
+                }
+            });
+
+            // Set search input value on click of result item
+            $(document).on("click", ".result p", function(){
+                $(this).parents(".search-box").find('input[type="text"]').val($(this).text());
+                $(this).parent(".result").empty();
+            });
+        });
+    </script>
     <title>Iniciar Sesión</title>
-
-    <style type="text/css">
-        .bd-placeholder-img {
-            font-size: 1.125rem;
-            text-anchor: middle;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-        }
-
-        @media (min-width: 768px) {
-            .bd-placeholder-img-lg {
-                font-size: 3.5rem;
-            }
-        }
-    </style>
 </head>
 <body class="text-center">
 <header>
@@ -122,6 +145,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <section class="col-12 col-lg-6 col-md-6 col-sm-6">
         <form class="form-signin" action="<?php echo htmlspecialchars($_SERVER["SCRIPT_NAME"]); ?>" method="post">
             <h1 class="h3 mb-3 mt-3 font-weight-normal" id="titulo">INICIAR SESIÓN</h1>
+            <?php
+            if(!empty($login_err)){
+                echo '<div class="alert alert-danger">' . $login_err . '</div>';
+            }
+            ?>
             <label for="inputEmail" class="sr-only">Email</label>
             <input type="email" id="inputEmail" name="email" class="form-control" placeholder="Email" required autofocus>
             <label for="inputPassword" class="sr-only">Contraseña</label>
@@ -133,6 +161,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             </div>
             <button class="btn btn-lg btn-primary btn-block" type="submit">Iniciar</button>
             <p class="mt-3 mb-3 text-muted"></p>
+            <br>
+            <p>Si aún no estas registrado <a href="registro.php">hazlo desde aquí</a>.</p>
         </form>
     </section>
 </main>

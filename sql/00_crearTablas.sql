@@ -1,6 +1,7 @@
 -- Crear tabla usuario para "proyecto"
 CREATE TABLE IF NOT EXISTS usuario (
-    dni VARCHAR(9) PRIMARY KEY,
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    dni VARCHAR(9) NOT NULL UNIQUE,
     nombre VARCHAR(20) NOT NULL,
     apellidos VARCHAR(100) NOT NULL,
     email VARCHAR(100) NOT NULL UNIQUE,
@@ -8,7 +9,7 @@ CREATE TABLE IF NOT EXISTS usuario (
     hospital VARCHAR(100) NOT NULL,
     vacuna1 DATE NOT NULL,
     vacuna2 DATE NOT NULL
-);
+    );
 
 
 -- Crear tabla vacuna para "proyecto"

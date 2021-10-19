@@ -24,7 +24,7 @@
     </script>
 </head>
 <body>
-<div class="container-fluid" style="height: 800px;">
+<div class="container-fluid">
     <header>
         <div class="row" id="row1">
             <div class="col-lg-3 col-md-4 col-sm-3 col-12" id="logo">
@@ -74,9 +74,9 @@
                         echo "<td>" . $row['dias_minimos'] . "</td>";
                         echo "<td>" . $row['dias_maximos'] . "</td>";
                         echo "<td>";
-                        echo '<a href="read.php?id='. $row['id'] .'" class="mr-3" title="View Record" data-toggle="tooltip"><span class="fa fa-eye"></span></a>';
-                        echo '<a href="update.php?id='. $row['id'] .'" class="mr-3" title="Update Record" data-toggle="tooltip"><span class="fa fa-pencil"></span></a>';
-                        echo '<a href="delete.php?id='. $row['id'] .'" title="Delete Record" data-toggle="tooltip"><span class="fa fa-trash"></span></a>';
+                        echo '<a href="verVacuna.php?id='. $row['id'] .'" class="mr-3" title="View Record" data-toggle="tooltip"><span class="fa fa-eye"></span></a>';
+                        echo '<a href="actualizarVacuna.php?id='. $row['id'] .'" class="mr-3" title="Update Record" data-toggle="tooltip"><span class="fa fa-pencil"></span></a>';
+                        echo '<a href="borrarVacuna.php?id='. $row['id'] .'" title="Delete Record" data-toggle="tooltip"><span class="fa fa-trash"></span></a>';
                         echo "</td>";
                         echo "</tr>";
                     }
@@ -94,8 +94,8 @@
             // Close connection
             $mysqli->close();
             ?>
-        </div>
-    </section>
+</div>
+</section>
 </main>
 <footer class="text-center text-lg-start">
     <!-- Grid container -->

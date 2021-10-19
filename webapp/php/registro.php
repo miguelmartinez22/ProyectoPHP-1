@@ -14,7 +14,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $dni_err = "Introduce tu dni.";
     } else{
         // Prepare a select statement
-        $sql = "SELECT dni FROM usuario WHERE dni = ?";
+        $sql = "SELECT id FROM usuario WHERE dni = ?";
 
         if($stmt = $mysqli->prepare($sql)){
             // Bind variables to the prepared statement as parameters
@@ -47,7 +47,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $nombre_err = "Introduce un nombre.";
     } else{
         // Prepare a select statement
-        $sql = "SELECT dni FROM usuario WHERE nombre = ?";
+        $sql = "SELECT id FROM usuario WHERE nombre = ?";
 
         if($stmt = $mysqli->prepare($sql)){
             // Bind variables to the prepared statement as parameters
@@ -77,7 +77,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $apellido_err = "Introduce tu primer apellido.";
     } else{
         // Prepare a select statement
-        $sql = "SELECT dni FROM usuario WHERE apellidos = ?";
+        $sql = "SELECT id FROM usuario WHERE apellidos = ?";
 
         if($stmt = $mysqli->prepare($sql)){
             // Bind variables to the prepared statement as parameters
@@ -109,7 +109,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $email_err = "El email sólo puede contener letras, números y ciertos carácteres especiales.";
     } else{
         // Prepare a select statement
-        $sql = "SELECT dni FROM usuario WHERE email = ?";
+        $sql = "SELECT id FROM usuario WHERE email = ?";
 
         if($stmt = $mysqli->prepare($sql)){
             // Bind variables to the prepared statement as parameters
@@ -161,7 +161,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $hospital_err = "Introduce un hospital de los mostrados abajo.";
     } else{
         // Prepare a select statement
-        $sql = "SELECT dni FROM usuario WHERE hospital = ?";
+        $sql = "SELECT id FROM usuario WHERE hospital = ?";
 
         if($stmt = $mysqli->prepare($sql)){
             // Bind variables to the prepared statement as parameters
@@ -189,14 +189,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     }
 
     //Crear vacunas
-    $vacuna1 = date('d-m-Y', strtotime('+1 week'));
-    $vacuna2 = date('d-m-Y', strtotime('+5 week'));
+    $vacuna1 = date('Y-m-d', strtotime('+1 week'));
+    $vacuna2 = date('Y-m-d', strtotime('+5 week'));
 
     // Check input errors before inserting in database
     if(empty($dni_err) && empty($nombre_err) && empty($apellido_err) && empty($email_err) && empty($password_err) && empty($confirm_password_err) && empty($hospital_err)){
 
         // Prepare an insert statement
-        $sql = "INSERT INTO usuario (dni, nombre, apellidos, email, password, hospital, vacuna1, vacuna2) VALUES (?, ?, ?, ?, ?, ?,  STR_TO_DATE(?, '%d,%m,%Y'), STR_TO_DATE(?, '%d,%m,%Y'))";
+        $sql = "INSERT INTO usuario (dni, nombre, apellidos, email, password, hospital, vacuna1, vacuna2) VALUES (?, ?, ?, ?, ?, ?,  STR_TO_DATE(?, '%Y-%m-%d'), STR_TO_DATE(?, '%Y-%m-%d'))";
 
         if($stmt = $mysqli->prepare($sql)){
             // Bind variables to the prepared statement as parameters
