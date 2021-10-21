@@ -1,38 +1,38 @@
 <?php
-// Process delete operation after confirmation
+// Procesamiento de datos cuando se envía el formulario
 if(isset($_POST["id"]) && !empty($_POST["id"])){
-    // Include config file
+    // Incluir archivo de configuración
     require_once "../config/configuracion.php";
 
-    // Prepare a delete statement
+    // Preparar la sentencia
     $sql = "DELETE FROM vacuna WHERE id = ?";
 
     if($stmt = $mysqli->prepare($sql)){
-        // Bind variables to the prepared statement as parameters
+        // Vincular las variables a la sentencia
         $stmt->bind_param("i", $param_id);
 
-        // Set parameters
+        // Definir parámetros
         $param_id = trim($_POST["id"]);
 
-        // Attempt to execute the prepared statement
+        // Ejecutar la sentencia
         if($stmt->execute()){
-            // Records deleted successfully. Redirect to landing page
+            // Si la sentencia se ejecuta con exito, redirigir a la página deseada
             header("location: listarVacuna.php");
             exit();
         } else{
-            echo "Oops! Something went wrong. Please try again later.";
+            echo "¡Vaya! Algo ha ido mal, vuelve a intentarlo más tarde.";
         }
     }
 
-    // Close statement
+    // Cerrar sentencia
     $stmt->close();
 
-    // Close connection
+    // Cerrar conexión
     $mysqli->close();
 } else{
-    // Check existence of id parameter
+    // Comporobar la existencia del parámetro id
     if(empty(trim($_GET["id"]))){
-        // URL doesn't contain id parameter. Redirect to error page
+        // Si no existe el id redirigir a error.php
         header("location: error.php");
         exit();
     }
@@ -43,7 +43,7 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Delete Record</title>
+    <title>Borrar Vacuna</title>
     <script src="https://kit.fontawesome.com/f33f57c2f7.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../css/bootstrap.css">
     <link rel="stylesheet" href="../css/borrarVacuna.css">
@@ -90,11 +90,11 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
         </div>
     </main>
     <footer class="text-center text-lg-start">
-        <!-- Grid container -->
+        <!-- Contenedor -->
         <div class="container p-4">
-            <!--Grid row-->
+            <!--Fila-->
             <div class="row">
-                <!--Grid column-->
+                <!--Columna-->
                 <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
                     <h2 class="text-uppercase">Contacto</h2>
 
@@ -102,7 +102,7 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
                     <p><h3><i class="fas fa-phone"></i>  600 01 00 23</h3></p>
                 </div>
 
-                <!--Grid column-->
+                <!--Columna-->
                 <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
                     <h2 class="text-uppercase">Lista de hospitales</h2>
 
@@ -112,18 +112,14 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
                     <p><h3><i class="fas fa-syringe"></i>  Wanda Metropolitano</h3></p>
                     <p><h3><i class="fas fa-microphone-alt"></i>  Wizink Center</h3></p>
                 </div>
-                <!--Grid column-->
             </div>
-            <!--Grid row-->
         </div>
-        <!-- Grid container -->
 
         <!-- Copyright -->
         <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.4);">
             © 2021 Copyright:
-            <a class="text-dark" href="https://mdbootstrap.com/">Comunidad de Madrid</a>
+            <a class="text-dark" href="https://www.comunidad.madrid/">Comunidad de Madrid</a>
         </div>
-        <!-- Copyright -->
     </footer>
 </div>
 

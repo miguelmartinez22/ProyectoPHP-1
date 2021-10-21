@@ -79,8 +79,8 @@ if(isset($_GET["id"]) && !empty(trim($_GET["id"]))){
         <div class="wrapper">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-12">
-                        <h1 class="mt-5 mb-3">Ver Vacuna</h1>
+                    <div class="col-12 col-lg-2 col-md-4 col-sm-10" style="margin: auto; background-color: rgba(222, 226, 230, 0.4)">
+                        <h1 class="mt-5 mb-3" style="text-align: center;">Ver Vacuna</h1>
                         <div class="form-group">
                             <label>Nombre</label>
                             <p><b><?php echo $row["nombre"]; ?></b></p>

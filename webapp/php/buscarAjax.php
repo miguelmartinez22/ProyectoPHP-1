@@ -1,25 +1,25 @@
 <?php
-// Include config file
+// Incluir archivo de configuración
 require_once "../config/configuracion.php";
 
 if(isset($_REQUEST["term"])){
-    // Prepare a select statement
+    // Preparar la sentencia
     $sql = "SELECT * FROM usuario WHERE email LIKE ?";
 
     if($stmt = $mysqli->prepare($sql)){
-        // Bind variables to the prepared statement as parameters
+        // Vincular las variables a la sentencia
         $stmt->bind_param("s", $param_term);
 
-        // Set parameters
+        // Definir los parámetros
         $param_term = $_REQUEST["term"] . '%';
 
-        // Attempt to execute the prepared statement
+        // Ejecutar la sentencia
         if($stmt->execute()){
             $result = $stmt->get_result();
 
-            // Check number of rows in the result set
+            // Comprobar el número de filas de la sentencia
             if($result->num_rows > 0){
-                // Fetch result rows as an associative array
+                // Guardar los resultados de la sentencia en un array
                 while($row = $result->fetch_array(MYSQLI_ASSOC)){
                     echo "<p>" . $row["nombre"] . "</p>";
                 }
@@ -31,10 +31,10 @@ if(isset($_REQUEST["term"])){
         }
     }
 
-    // Close statement
+    // Cerrar sentencia
     $stmt->close();
 }
 
-// Close connection
+// Cerrar conexión
 $mysqli->close();
 ?>

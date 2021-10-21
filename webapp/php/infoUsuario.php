@@ -15,14 +15,14 @@ $idEstudio = $_SESSION["id"];
 $sql = "SELECT dni, nombre, apellidos, email, hospital, vacuna1, vacuna2 FROM usuario WHERE id = ?";
 
 if($stmt = $mysqli->prepare($sql)) {
-    // Bind variables to the prepared statement as parameters
+    // Vincular las variables a la sentencia
     $stmt->bind_param("i", $idEstudio);
 
     if($stmt->execute()) {
-        // Store result
+        // Obtiene el resultado
         $result = $stmt->get_result();
 
-        // Check if username exists, if yes then verify password
+        // Verifica si existe el usuario, después verifica la contraseña
         if ($result->num_rows == 1) {
             // Bind result variables
             $row = $result->fetch_array(MYSQLI_ASSOC);
@@ -38,10 +38,10 @@ if($stmt = $mysqli->prepare($sql)) {
         echo "¡Vaya! Algo ha ido mal, vuelve a intentarlo más tarde.";
     }
 
-    // Close statement
+    // Cerrar sentencia
     $stmt->close();
 }
-// Close connection
+// Cerrar conexión
 $mysqli->close();
 
 ?>
@@ -99,12 +99,12 @@ $mysqli->close();
             <a href="logout.php" class="btn btn-danger ml-3">Salir</a>
         </section>
     </main>
-    <footer class="text-center text-lg-start mt-2">
-        <!-- Grid container -->
+    <footer class="text-center text-lg-start">
+        <!-- Contenedor -->
         <div class="container p-4">
-            <!--Grid row-->
+            <!--Fila-->
             <div class="row">
-                <!--Grid column-->
+                <!--Columna-->
                 <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
                     <h2 class="text-uppercase">Contacto</h2>
 
@@ -112,7 +112,7 @@ $mysqli->close();
                     <p><h3><i class="fas fa-phone"></i>  600 01 00 23</h3></p>
                 </div>
 
-                <!--Grid column-->
+                <!--Columna-->
                 <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
                     <h2 class="text-uppercase">Lista de hospitales</h2>
 
@@ -122,18 +122,14 @@ $mysqli->close();
                     <p><h3><i class="fas fa-syringe"></i>  Wanda Metropolitano</h3></p>
                     <p><h3><i class="fas fa-microphone-alt"></i>  Wizink Center</h3></p>
                 </div>
-                <!--Grid column-->
             </div>
-            <!--Grid row-->
         </div>
-        <!-- Grid container -->
 
         <!-- Copyright -->
         <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.4);">
             © 2021 Copyright:
-            <a class="text-dark" href="https://mdbootstrap.com/">Comunidad de Madrid</a>
+            <a class="text-dark" href="https://www.comunidad.madrid/">Comunidad de Madrid</a>
         </div>
-        <!-- Copyright -->
     </footer>
 
     <script type="text/javascript" src="../JS/jquery-3.4.1.js"></script>

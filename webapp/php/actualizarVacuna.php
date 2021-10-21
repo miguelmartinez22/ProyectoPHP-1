@@ -1,8 +1,8 @@
 <?php
-// Include config file
+// Incluir archivo de configuración
 require_once "../config/configuracion.php";
 
-// Define variables and initialize with empty values
+// Definir las variables e inicializarlas con valores vacíos
 $nombre = $nombrelargo = $fabricante = $numdosis = "";
 $diasminimos =  $diasmaximos = "";
 $nombre_err = $nombrelargo_err = $fabricante_err = $numdosis_err ="";
@@ -10,10 +10,10 @@ $diasminimos_err =  $diasmaximos_err = "";
 
 // Procesamiento de datos cuando se envía el formulario
 if(isset($_POST["id"]) && !empty($_POST["id"])){
-    // Get hidden input value
+    // Obtener el valor del formulario
     $id = $_POST["id"];
 
-    // Validate nombre
+    // Validar nombre
     $input_nombre = trim($_POST["nombre"]);
     if(empty($input_nombre)){
         $nombre_err = "Introduce un nombre.";
@@ -23,7 +23,7 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
         $nombre = $input_nombre;
     }
 
-    // Validate nombre_largo
+    // Validar nombre_largo
     $input_nombrelargo = trim($_POST["nombrelargo"]);
     if(empty($input_nombrelargo)){
         $nombrelargo_err = "Introduce un nombre.";
@@ -33,7 +33,7 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
         $nombrelargo = $input_nombrelargo;
     }
 
-    // Validate fabricante
+    // Validar fabricante
     $input_fabricante = trim($_POST["fabricante"]);
     if(empty($input_fabricante)){
         $fabricante_err = "Introduce el fabricante de la vacuna.";
@@ -41,7 +41,7 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
         $fabricante = $input_fabricante;
     }
 
-    // Validate numdosis
+    // Validar numdosis
     $input_numdosis = trim($_POST["numdosis"]);
     if(empty($input_numdosis)){
         $numdosis_err = "Introduce el número de dosis.";
@@ -54,17 +54,17 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
     $diasminimos = trim($_POST["diasminimos"]);
     $diasmaximos = trim($_POST["diasmaximos"]);
 
-    // Check input errors before inserting in database
+    // Revisar los errores de los campos de texto antes de realizar la consulta
     if(empty($nombre_err) && empty($fabricante_err) && empty($nombrelargo_err)&& empty($numdosis_err)){
-        // Prepare an update statement
+        // Preparar la sentencia
         $sql = "UPDATE vacuna SET nombre=?, nombre_largo=?, fabricante=?, num_dosis=?, dias_minimos=?, dias_maximos=? WHERE id=?";
 
         if($stmt = $mysqli->prepare($sql)){
-            // Bind variables to the prepared statement as parameters
+            // Vincular las variables a la sentencia
             $stmt->bind_param("sssiiii", $param_nombre, $param_nombrelargo, $param_fabricante,
                 $param_numdosis, $param_diasminimos, $param_diasmaximos, $param_id);
 
-            // Set parameters
+            // Definir los parámetros
             $param_nombre = $nombre;
             $param_nombrelargo = $nombrelargo;
             $param_fabricante = $fabricante;
@@ -73,9 +73,9 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
             $param_diasmaximos = $diasmaximos;
             $param_id = $id;
 
-            // Attempt to execute the prepared statement
+            // Ejecutar la sentencia
             if($stmt->execute()){
-                // Records updated successfully. Redirect to landing page
+                // Si la sentencia se ejecuta con exito, redirigir a la página deseada
                 header("location: listarVacuna.php");
                 exit();
             } else{
@@ -83,37 +83,36 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
             }
         }
 
-        // Close statement
+        // Cerrar sentencia
         $stmt->close();
     }
 
-    // Close connection
+    // Cerrar conexión
     $mysqli->close();
 } else{
-    // Check existence of id parameter before processing further
+    // Comporobar la existencia del parámetro id
     if(isset($_GET["id"]) && !empty(trim($_GET["id"]))){
         // Get URL parameter
         $id =  trim($_GET["id"]);
 
-        // Prepare a select statement
+        // Preparar la sentencia
         $sql = "SELECT * FROM vacuna WHERE id = ?";
         if($stmt = $mysqli->prepare($sql)){
-            // Bind variables to the prepared statement as parameters
+            // Vincular las variables a la sentencia
             $stmt->bind_param("i", $param_id);
 
-            // Set parameters
+            // Definir parámetros
             $param_id = $id;
 
-            // Attempt to execute the prepared statement
+            // Ejecutar la sentencia
             if($stmt->execute()){
                 $result = $stmt->get_result();
 
                 if($result->num_rows == 1){
-                    /* Fetch result row as an associative array. Since the result set
-                    contains only one row, we don't need to use while loop */
+                    // Guardar los resultados de la sentencia en un array
                     $row = $result->fetch_array(MYSQLI_ASSOC);
 
-                    // Retrieve individual field value
+                    // Declarar los valores del array
                     $nombre = $row["nombre"];
                     $nombrelargo = $row["nombre_largo"];
                     $fabricante = $row["fabricante"];
@@ -121,23 +120,23 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
                     $diasminimos = $row["dias_minimos"];
                     $diasmaximos = $row["dias_maximos"];
                 } else{
-                    // URL doesn't contain valid id. Redirect to error page
+                    // Si no existe el id redirigir a error.php
                     header("location: error.php");
                     exit();
                 }
 
             } else{
-                echo "Oops! Algo fue mal. Please try again later.";
+                echo "Oops! Algo fue mal. Por favor intantalo de nuevo más tarde.";
             }
         }
 
-        // Close statement
+        // Cerrar sentencia
         $stmt->close();
 
-        // Close connection
+        // Cerrar conexión
         $mysqli->close();
     }  else{
-        // URL doesn't contain id parameter. Redirect to error page
+        // Si no existe el id redirigir a error.php
         header("location: error.php");
         exit();
     }
@@ -210,11 +209,11 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
         </div>
     </main>
     <footer class="text-center text-lg-start">
-        <!-- Grid container -->
+        <!-- Contenedor -->
         <div class="container p-4">
-            <!--Grid row-->
+            <!--Fila-->
             <div class="row">
-                <!--Grid column-->
+                <!--Columna-->
                 <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
                     <h2 class="text-uppercase">Contacto</h2>
 
@@ -222,7 +221,7 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
                     <p><h3><i class="fas fa-phone"></i>  600 01 00 23</h3></p>
                 </div>
 
-                <!--Grid column-->
+                <!--Columna-->
                 <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
                     <h2 class="text-uppercase">Lista de hospitales</h2>
 
@@ -232,23 +231,19 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
                     <p><h3><i class="fas fa-syringe"></i>  Wanda Metropolitano</h3></p>
                     <p><h3><i class="fas fa-microphone-alt"></i>  Wizink Center</h3></p>
                 </div>
-                <!--Grid column-->
             </div>
-            <!--Grid row-->
         </div>
-        <!-- Grid container -->
 
         <!-- Copyright -->
         <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.4);">
             © 2021 Copyright:
-            <a class="text-dark" href="https://mdbootstrap.com/">Comunidad de Madrid</a>
+            <a class="text-dark" href="https://www.comunidad.madrid/">Comunidad de Madrid</a>
         </div>
-        <!-- Copyright -->
     </footer>
-</div>
+    </div>
 
-<script type="text/javascript" src="../JS/jquery-3.4.1.js"></script>
-<script type="text/javascript" src="../JS/popper.min.js"></script>
-<script type="text/javascript" src="../JS/bootstrap.js"></script>
+    <script type="text/javascript" src="../JS/jquery-3.4.1.js"></script>
+    <script type="text/javascript" src="../JS/popper.min.js"></script>
+    <script type="text/javascript" src="../JS/bootstrap.js"></script>
 </body>
 </html>

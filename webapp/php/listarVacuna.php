@@ -16,8 +16,7 @@ if (!isset($_SESSION["login"]) || $_SESSION["login"] !== true || $_SESSION["emai
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Dashboard</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Vacunas</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://kit.fontawesome.com/f33f57c2f7.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../css/bootstrap.css">
@@ -57,7 +56,7 @@ if (!isset($_SESSION["login"]) || $_SESSION["login"] !== true || $_SESSION["emai
             // Fichero de configuración
             require_once "../config/configuracion.php";
 
-            // Attempt select query execution
+            // Prepara la sentencia y la ejecuta
             $sql = "SELECT * FROM vacuna";
             if($result = $mysqli->query($sql)){
                 if($result->num_rows > 0){
@@ -92,7 +91,7 @@ if (!isset($_SESSION["login"]) || $_SESSION["login"] !== true || $_SESSION["emai
                     }
                     echo "</tbody>";
                     echo "</table>";
-                    // Free result set
+                    // Liberar resultado
                     $result->free();
                 } else{
                     echo '<div class="alert alert-danger"><em>No se han encontrado vacunas creadas.</em></div>';
@@ -108,11 +107,11 @@ if (!isset($_SESSION["login"]) || $_SESSION["login"] !== true || $_SESSION["emai
 </section>
 </main>
 <footer class="text-center text-lg-start">
-    <!-- Grid container -->
+    <!-- Contenedor -->
     <div class="container p-4">
-        <!--Grid row-->
+        <!--Fila-->
         <div class="row">
-            <!--Grid column-->
+            <!--Columna-->
             <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
                 <h2 class="text-uppercase">Contacto</h2>
 
@@ -120,7 +119,7 @@ if (!isset($_SESSION["login"]) || $_SESSION["login"] !== true || $_SESSION["emai
                 <p><h3><i class="fas fa-phone"></i>  600 01 00 23</h3></p>
             </div>
 
-            <!--Grid column-->
+            <!--Columna-->
             <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
                 <h2 class="text-uppercase">Lista de hospitales</h2>
 
@@ -130,23 +129,19 @@ if (!isset($_SESSION["login"]) || $_SESSION["login"] !== true || $_SESSION["emai
                 <p><h3><i class="fas fa-syringe"></i>  Wanda Metropolitano</h3></p>
                 <p><h3><i class="fas fa-microphone-alt"></i>  Wizink Center</h3></p>
             </div>
-            <!--Grid column-->
         </div>
-        <!--Grid row-->
     </div>
-    <!-- Grid container -->
 
     <!-- Copyright -->
     <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.4);">
         © 2021 Copyright:
-        <a class="text-dark" href="https://mdbootstrap.com/">Comunidad de Madrid</a>
+        <a class="text-dark" href="https://www.comunidad.madrid/">Comunidad de Madrid</a>
     </div>
-    <!-- Copyright -->
 </footer>
+</div>
 
 <script type="text/javascript" src="../JS/jquery-3.4.1.js"></script>
 <script type="text/javascript" src="../JS/popper.min.js"></script>
 <script type="text/javascript" src="../JS/bootstrap.js"></script>
-
 </body>
 </html>

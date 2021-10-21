@@ -2,7 +2,7 @@
 // Inicializar la sesion
 session_start();
 
-// Check if the user is already logged in, if yes then redirect him to welcome page
+// Comprueba si el usuario está logeado, si lo está, le redirige a infoUsuario.php
 if(isset($_SESSION["login"]) && $_SESSION["login"] === true){
     header("location: infoUsuario.php");
     exit;

@@ -1,16 +1,16 @@
 <?php
-// Include config file
+// Incluir archivo de configuración
 require_once "../config/configuracion.php";
 
-// Define variables and initialize with empty values
+// Definir las variables e inicializarlas con valores vacíos
 $nombre = $nombreLargo = $fabricante = $numDosis = "";
 $tiempoMinimo = $tiempoMaximo = "";
 $nombre_error = $nombreLargo_error = $fabricante_error = $numDosis_error = "";
 $tiempoMinimo_error = $tiempoMaximo_error = "";
 
-// Processing form data when form is submitted
+// Procesamiento de datos cuando se envía el formulario
 if($_SERVER["REQUEST_METHOD"] == "POST"){
-    // Validate nombre
+    // Validar nombre
     $input_nombre = trim($_POST["nombre"]);
     if(empty($input_nombre)){
         $nombre_error = "Introduce un nombre.";
@@ -20,7 +20,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $nombre = $input_nombre;
     }
 
-    // Validate nombreLargo
+    // Validar nombreLargo
     $input_nombreLargo = trim($_POST["nombreLargo"]);
     if(empty($input_nombreLargo)){
         $nombreLargo_error = "Introduce el nombre científico.";
@@ -28,7 +28,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $nombreLargo = $input_nombreLargo;
     }
 
-    // Validate fabricante
+    // Validar fabricante
     $input_fabricante = trim($_POST["fabricante"]);
     if(empty($input_fabricante)){
         $fabricante_error = "Introduce el fabricante.";
@@ -36,7 +36,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $fabricante = $input_fabricante;
     }
 
-    // Validate numDosis
+    // Validar numDosis
     $input_numDosis = trim($_POST["numDosis"]);
     if(empty($input_numDosis)){
         $numDosis_error = "Introduce el número de dosis necesarias.";
@@ -46,7 +46,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $numDosis = $input_numDosis;
     }
 
-    // Validate tiempo minimo
+    // Validar tiempo minimo
     $input_tiempoMinimo = trim($_POST["tiempoMinimo"]);
     if(empty($input_tiempoMinimo)){
         $tiempoMinimo_error = "Introduce el tiempo mínimo de espera para la segunda dosis.";
@@ -56,7 +56,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $tiempoMinimo = $input_tiempoMinimo;
     }
 
-    // Validate tiempo maximo
+    // Validar tiempo maximo
     $input_tiempoMaximo = trim($_POST["tiempoMaximo"]);
     if(empty($input_tiempoMaximo)){
         $tiempoMaximo_error = "Please enter the salary amount.";
@@ -72,10 +72,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $sql = "INSERT INTO vacuna (nombre, nombre_largo, fabricante, num_dosis, dias_minimos, dias_maximos) VALUES (?, ?, ?, ?, ?, ?)";
 
         if($stmt = $mysqli->prepare($sql)){
-            // Bind variables to the prepared statement as parameters
+            // Vincular las variables a la sentencia
             mysqli_stmt_bind_param($stmt, "sssiii", $param_nombre, $param_nombreLargo, $param_fabricante, $param_numDosis, $param_tiempoMinimo, $param_tiempoMaximo);
 
-            // Set parameters
+            // Definir los parámetros
             $param_nombre = $nombre;
             $param_nombreLargo = $nombreLargo;
             $param_fabricante = $fabricante;
@@ -83,9 +83,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             $param_tiempoMinimo = $tiempoMinimo;
             $param_tiempoMaximo = $tiempoMaximo;
 
-            // Attempt to execute the prepared statement
+            // Ejecutar la sentencia
             if(mysqli_stmt_execute($stmt)){
-                // Records created successfully. Redirect to landing page
+                // Si la sentencia se ejecuta con exito, redirigir a la página deseada
                 header("location: listarVacuna.php");
                 exit();
             } else{
@@ -93,11 +93,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             }
         }
 
-        // Close statement
+        // Cerrar sentencia
         $stmt->close();
     }
 
-    // Close connection
+    // Cerrar conexión
     $mysqli->close();
 }
 ?>
@@ -106,7 +106,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>CREAR VACUNA</title>
+    <title>Crear Vacuna</title>
     <script src="https://kit.fontawesome.com/f33f57c2f7.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../css/bootstrap.css">
     <link rel="stylesheet" href="../css/crearVacuna.css">
@@ -165,12 +165,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             </form>
         </section>
     </main>
-    <footer class=" mt-3 text-center text-lg-start">
-        <!-- Grid container -->
+    <footer class="text-center text-lg-start">
+        <!-- Contenedor -->
         <div class="container p-4">
-            <!--Grid row-->
+            <!--Fila-->
             <div class="row">
-                <!--Grid column-->
+                <!--Columna-->
                 <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
                     <h2 class="text-uppercase">Contacto</h2>
 
@@ -178,7 +178,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     <p><h3><i class="fas fa-phone"></i>  600 01 00 23</h3></p>
                 </div>
 
-                <!--Grid column-->
+                <!--Columna-->
                 <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
                     <h2 class="text-uppercase">Lista de hospitales</h2>
 
@@ -188,24 +188,19 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     <p><h3><i class="fas fa-syringe"></i>  Wanda Metropolitano</h3></p>
                     <p><h3><i class="fas fa-microphone-alt"></i>  Wizink Center</h3></p>
                 </div>
-                <!--Grid column-->
             </div>
-            <!--Grid row-->
         </div>
-        <!-- Grid container -->
 
         <!-- Copyright -->
         <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.4);">
             © 2021 Copyright:
-            <a class="text-dark" href="https://mdbootstrap.com/">Comunidad de Madrid</a>
+            <a class="text-dark" href="https://www.comunidad.madrid/">Comunidad de Madrid</a>
         </div>
-        <!-- Copyright -->
     </footer>
 </div>
 
 <script type="text/javascript" src="../JS/jquery-3.4.1.js"></script>
 <script type="text/javascript" src="../JS/popper.min.js"></script>
 <script type="text/javascript" src="../JS/bootstrap.js"></script>
-
 </body>
 </html>
