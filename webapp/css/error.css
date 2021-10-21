@@ -32,13 +32,12 @@ article {
     -webkit-text-stroke: 1px black;
 }
 
-main {
-    border: 1px solid;
-}
-
 section {
     margin: auto;
-    background-color: #B0E7E7;
+}
+
+img {
+
 }
 
 footer {

@@ -31,9 +31,10 @@
             </div>
         </header>
         <main>
-            <section>
-                <article style="text-align: center">
-                    <h2>Lo sentimos,no se ha podido localizar el recurso o página especificado.</h2>
+            <section style="text-align: center">
+                <h2>Lo sentimos, no se ha podido localizar el recurso o página especificado.</h2>
+                <article class="col-10 col-lg-8 col-md-8 col-sm8">
+                    <img src="../images/emoji.png" alt="Emoji triste">
                 </article>
             </section>
         </main>
