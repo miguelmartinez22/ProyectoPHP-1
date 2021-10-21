@@ -66,11 +66,22 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         // Guardamos los datos de las sesiones en variables
                         $_SESSION["login"] = true;
                         $_SESSION["id"] = $fila["id"];
+
                         $_SESSION["email"] = $fila["email"];
 
+                        /*if (isset($_COOKIE[$fila["email"]])) {
+                            $cont = $_COOKIE[$fila["email"]];
+                            setcookie($fila["email"], $cont + 1, time() + 3600);
+                        } else {
+                            setcookie($fila["email"], 1, time() + 3600);
+                        }*/
 
-                        // Redirect user to welcome page
-                        header("location: infoUsuario.php");
+                        if ($_SESSION["email"] == "gestor@gmail.com"){
+                            header("location: listarVacuna.php");
+                        } else {
+                            header("location: infoUsuario.php");
+                        }
+
                     } else{
                         // Password is not valid, display a generic error message
                         $login_err = "Email o contraseña incorrectos.";

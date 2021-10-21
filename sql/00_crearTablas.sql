@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS usuario (
     hospital VARCHAR(100) NOT NULL,
     vacuna1 DATE NOT NULL,
     vacuna2 DATE NOT NULL
-    );
+);
 
 
 -- Crear tabla vacuna para "proyecto"
