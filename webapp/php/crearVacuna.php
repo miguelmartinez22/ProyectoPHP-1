@@ -86,7 +86,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             // Attempt to execute the prepared statement
             if(mysqli_stmt_execute($stmt)){
                 // Records created successfully. Redirect to landing page
-                header("location: verVacuna.php");
+                header("location: listarVacuna.php");
                 exit();
             } else{
                 echo "¡Vaya! Algo ha ido mal, vuelve a intentarlo más tarde.";

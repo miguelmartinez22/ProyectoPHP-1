@@ -1,3 +1,17 @@
+<?php
+require_once "../config/configuracion.php";
+
+// inicilizar la sesion
+session_start();
+
+// Verifica que el usuario ha iniciado sesión. En caso contrario lo redirige a esa página
+if (!isset($_SESSION["login"]) || $_SESSION["login"] !== true || $_SESSION["email"] !== "gestor@gmail.com"){
+    header("location: login.php");
+    exit;
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

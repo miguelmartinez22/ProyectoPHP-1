@@ -50,11 +50,13 @@ $mysqli->close();
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Welcome</title>
     <script src="https://kit.fontawesome.com/f33f57c2f7.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../css/bootstrap.css">
     <link rel="stylesheet" href="../css/infoUsuario.css">
-    <title>Proyecto sitio web con PHP. Javier Martinez y Miguel Martinez</title>
+    <title>Información del usuario</title>
+    <script type="text/javascript">
+        console.log("El usuario ha iniciado sesión " + <?php echo $_COOKIE[$_SESSION["id"]]; ?> + " veces.")
+    </script>
 </head>
 <body>
     <header>
@@ -71,7 +73,6 @@ $mysqli->close();
     </header>
     <main>
         <h1 class="my-5" style="text-align: center">Hola, <b><?php echo htmlspecialchars($_SESSION["email"]); ?></b>. Estos son tus datos de vacunación.</h1>
-        <!-- <p>Has ingresado <b><?php echo $_COOKIE[$_SESSION["email"]]; ?></b> veces</p> -->
         <section class="col-12 col-lg-10 col-md-10 col-sm-10" style="margin: auto">
             <table class="table table-bordered table-striped">
                 <tr>

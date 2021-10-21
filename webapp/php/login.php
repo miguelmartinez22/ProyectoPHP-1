@@ -66,15 +66,15 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         // Guardamos los datos de las sesiones en variables
                         $_SESSION["login"] = true;
                         $_SESSION["id"] = $fila["id"];
-
                         $_SESSION["email"] = $fila["email"];
 
-                        /*if (isset($_COOKIE[$fila["email"]])) {
-                            $cont = $_COOKIE[$fila["email"]];
-                            setcookie($fila["email"], $cont + 1, time() + 3600);
+                        if (isset($_COOKIE[$fila["id"]])) {
+                            $cont = $_COOKIE[$fila["id"]];
+                            setcookie($fila["id"], $cont + 1, time() + 3600);
                         } else {
-                            setcookie($fila["email"], 1, time() + 3600);
-                        }*/
+                            setcookie($fila["id"], 1, time() + 3600);
+
+                        }
 
                         if ($_SESSION["email"] == "gestor@gmail.com"){
                             header("location: listarVacuna.php");
