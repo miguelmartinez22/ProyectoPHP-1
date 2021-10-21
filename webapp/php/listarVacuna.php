@@ -23,10 +23,6 @@ if (!isset($_SESSION["login"]) || $_SESSION["login"] !== true || $_SESSION["emai
     <link rel="stylesheet" href="../css/bootstrap.css">
     <link rel="stylesheet" href="../css/listarVacuna.css">
     <style>
-        .wrapper{
-            width: 600px;
-            margin: 0 auto;
-        }
         table tr td:last-child{
             width: 120px;
         }
